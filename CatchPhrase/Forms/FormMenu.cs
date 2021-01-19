@@ -16,5 +16,12 @@ namespace CatchPhrase
         {
             InitializeComponent();
         }
+
+        private void authors_Click(object sender, EventArgs e)
+        {
+            Hide();
+            new FormAuthors().ShowDialog();
+            Show();
+        }
     }
 }

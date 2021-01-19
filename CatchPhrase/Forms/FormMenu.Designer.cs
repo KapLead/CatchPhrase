@@ -46,6 +46,7 @@ namespace CatchPhrase
             this.authors.TabIndex = 0;
             this.authors.Text = "Авторы";
             this.authors.UseVisualStyleBackColor = true;
+            this.authors.Click += new System.EventHandler(this.authors_Click);
             // 
             // panel1
             // 
@@ -85,14 +86,15 @@ namespace CatchPhrase
             // 
             // FormMenu
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(259, 316);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.types);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.authors);
+            this.Font = new System.Drawing.Font("Arial Narrow", 12F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(275, 355);
