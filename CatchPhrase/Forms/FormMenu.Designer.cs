@@ -33,7 +33,7 @@ namespace CatchPhrase
             this.authors = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.types = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.phrase = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
@@ -67,15 +67,16 @@ namespace CatchPhrase
             this.types.UseVisualStyleBackColor = true;
             this.types.Click += new System.EventHandler(this.types_Click);
             // 
-            // button2
+            // phrase
             // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button2.Location = new System.Drawing.Point(10, 214);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(239, 92);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Фразы";
-            this.button2.UseVisualStyleBackColor = true;
+            this.phrase.Dock = System.Windows.Forms.DockStyle.Top;
+            this.phrase.Location = new System.Drawing.Point(10, 214);
+            this.phrase.Name = "phrase";
+            this.phrase.Size = new System.Drawing.Size(239, 92);
+            this.phrase.TabIndex = 4;
+            this.phrase.Text = "Фразы";
+            this.phrase.UseVisualStyleBackColor = true;
+            this.phrase.Click += new System.EventHandler(this.phrase_Click);
             // 
             // panel2
             // 
@@ -90,7 +91,7 @@ namespace CatchPhrase
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(259, 316);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.phrase);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.types);
             this.Controls.Add(this.panel1);
@@ -114,7 +115,7 @@ namespace CatchPhrase
         private System.Windows.Forms.Button authors;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button types;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button phrase;
         private System.Windows.Forms.Panel panel2;
     }
 }

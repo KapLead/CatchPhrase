@@ -17,18 +17,22 @@ namespace CatchPhrase
             InitializeComponent();
         }
 
+        /// <summary> Открыть форму авторов </summary>
         private void authors_Click(object sender, EventArgs e)
         {
-            Hide();
             new FormAuthors().ShowDialog();
-            Show();
         }
 
+        /// <summary> Открыть форму типов </summary>
         private void types_Click(object sender, EventArgs e)
         {
-            Hide();
             new FormTypePhrases().ShowDialog();
-            Show();
+        }
+
+        /// <summary> Открыть форму фраз </summary>
+        private void phrase_Click(object sender, EventArgs e)
+        {
+            new FormPhrase().ShowDialog();
         }
     }
 }
