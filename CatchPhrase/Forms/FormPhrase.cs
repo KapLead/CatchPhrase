@@ -90,16 +90,14 @@ namespace CatchPhrase
         /// <summary> Добавление новой пустой записи в базу данных </summary>
         private void insert_Click(object sender, EventArgs e)
         {
-            // Создадим подключение к бд
-            using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
+            var newid = -1;
+            foreach (DataGridViewRow row in grid.Rows)
             {
-                con.Open();// Откроем соединение
-                // Добавим пустую запись в таблицу Author
-                new SqlCommand($"INSERT INTO Phrase(Id,Name,Country) VALUES({grid.Rows.Count + 1},' ',' ')", con).ExecuteNonQuery();
+                if ((int) row.Cells[0].Value > newid) 
+                    newid = (int) row.Cells[0].Value;
             }
-            UpdateTable();// Обновим содержимое таблицы
-            // Выделим последнюю строку таблицы (новая созданная запись)
-            grid.Rows[grid.RowCount - 1].Selected = true;
+            //if (newid > 0)
+            new FormPhraseEdit(newid).ShowDialog();
         }
 
         /// <summary> Удаление выделенной записи </summary>

@@ -30,6 +30,7 @@ namespace CatchPhrase
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPhrase));
             this.panel1 = new System.Windows.Forms.Panel();
             this.back = new System.Windows.Forms.Button();
@@ -59,13 +60,13 @@ namespace CatchPhrase
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
-            this.panel1.Size = new System.Drawing.Size(173, 450);
+            this.panel1.Size = new System.Drawing.Size(173, 396);
             this.panel1.TabIndex = 1;
             // 
             // back
             // 
             this.back.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.back.Location = new System.Drawing.Point(10, 395);
+            this.back.Location = new System.Drawing.Point(10, 341);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(153, 45);
             this.back.TabIndex = 5;
@@ -101,6 +102,7 @@ namespace CatchPhrase
             this.insert.TabIndex = 2;
             this.insert.Text = "Добавить";
             this.insert.UseVisualStyleBackColor = true;
+            this.insert.Click += new System.EventHandler(this.insert_Click);
             // 
             // panel3
             // 
@@ -111,7 +113,7 @@ namespace CatchPhrase
             this.panel3.Location = new System.Drawing.Point(173, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10, 6, 10, 10);
-            this.panel3.Size = new System.Drawing.Size(671, 450);
+            this.panel3.Size = new System.Drawing.Size(611, 396);
             this.panel3.TabIndex = 2;
             // 
             // grid
@@ -134,13 +136,22 @@ namespace CatchPhrase
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(10, 61);
             this.grid.Name = "grid";
+            this.grid.ReadOnly = true;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.ControlDark;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grid.RowHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid.RowHeadersVisible = false;
             this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid.ShowCellErrors = false;
             this.grid.ShowCellToolTips = false;
             this.grid.ShowEditingIcon = false;
             this.grid.ShowRowErrors = false;
-            this.grid.Size = new System.Drawing.Size(651, 379);
+            this.grid.Size = new System.Drawing.Size(591, 325);
             this.grid.TabIndex = 2;
             // 
             // panel4
@@ -150,7 +161,7 @@ namespace CatchPhrase
             this.panel4.Location = new System.Drawing.Point(10, 6);
             this.panel4.Name = "panel4";
             this.panel4.Padding = new System.Windows.Forms.Padding(0, 0, 0, 6);
-            this.panel4.Size = new System.Drawing.Size(651, 55);
+            this.panel4.Size = new System.Drawing.Size(591, 55);
             this.panel4.TabIndex = 3;
             // 
             // groupBox1
@@ -159,7 +170,7 @@ namespace CatchPhrase
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(651, 49);
+            this.groupBox1.Size = new System.Drawing.Size(591, 49);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Поиск";
@@ -170,14 +181,15 @@ namespace CatchPhrase
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBox1.Location = new System.Drawing.Point(114, 18);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(403, 20);
+            this.textBox1.Size = new System.Drawing.Size(343, 20);
             this.textBox1.TabIndex = 0;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // FormPhrase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 450);
+            this.ClientSize = new System.Drawing.Size(784, 396);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));

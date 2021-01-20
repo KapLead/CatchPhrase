@@ -31,11 +31,11 @@ namespace CatchPhrase
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPhraseEdit));
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.authors = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.types = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.Value = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.SuspendLayout();
@@ -50,14 +50,14 @@ namespace CatchPhrase
             this.label1.TabIndex = 0;
             this.label1.Text = "Автор";
             // 
-            // comboBox1
+            // authors
             // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(10, 30);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(313, 28);
-            this.comboBox1.TabIndex = 1;
+            this.authors.Dock = System.Windows.Forms.DockStyle.Top;
+            this.authors.FormattingEnabled = true;
+            this.authors.Location = new System.Drawing.Point(10, 30);
+            this.authors.Name = "authors";
+            this.authors.Size = new System.Drawing.Size(313, 28);
+            this.authors.TabIndex = 1;
             // 
             // label2
             // 
@@ -70,14 +70,14 @@ namespace CatchPhrase
             this.label2.TabIndex = 2;
             this.label2.Text = "Тип";
             // 
-            // comboBox2
+            // types
             // 
-            this.comboBox2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(10, 88);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(313, 28);
-            this.comboBox2.TabIndex = 3;
+            this.types.Dock = System.Windows.Forms.DockStyle.Top;
+            this.types.FormattingEnabled = true;
+            this.types.Location = new System.Drawing.Point(10, 88);
+            this.types.Name = "types";
+            this.types.Size = new System.Drawing.Size(313, 28);
+            this.types.TabIndex = 3;
             // 
             // label3
             // 
@@ -90,14 +90,14 @@ namespace CatchPhrase
             this.label3.TabIndex = 4;
             this.label3.Text = "Фраза";
             // 
-            // textBox1
+            // Value
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(10, 146);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(313, 158);
-            this.textBox1.TabIndex = 5;
+            this.Value.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Value.Location = new System.Drawing.Point(10, 146);
+            this.Value.Multiline = true;
+            this.Value.Name = "Value";
+            this.Value.Size = new System.Drawing.Size(313, 158);
+            this.Value.TabIndex = 5;
             // 
             // button1
             // 
@@ -123,13 +123,13 @@ namespace CatchPhrase
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(333, 404);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.Value);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.comboBox2);
+            this.Controls.Add(this.types);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.authors);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial Narrow", 12F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -147,11 +147,11 @@ namespace CatchPhrase
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox authors;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBox2;
+        private System.Windows.Forms.ComboBox types;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox Value;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Panel panel1;
     }
