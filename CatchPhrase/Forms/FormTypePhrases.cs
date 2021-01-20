@@ -90,7 +90,7 @@ namespace CatchPhrase
             {
                 con.Open(); // Откроем соединение
                 // Добавим пустую запись в таблицу Author
-                new SqlCommand($"INSERT INTO TypePhrase(Id,Name) VALUES({grid.Rows.Count + 1},N' ')", con)
+                new SqlCommand($"INSERT INTO TypePhrase(Name) VALUES(N' ')", con)
                     .ExecuteNonQuery();
             }
 

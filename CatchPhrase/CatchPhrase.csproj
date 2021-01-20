@@ -65,6 +65,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\FormTypePhraseEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTypePhraseEdit.Designer.cs">
+      <DependentUpon>FormTypePhraseEdit.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormAuthorEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -103,6 +109,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Forms\FormTypePhraseEdit.resx">
+      <DependentUpon>FormTypePhraseEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormAuthorEdit.resx">
       <DependentUpon>FormAuthorEdit.cs</DependentUpon>
     </EmbeddedResource>

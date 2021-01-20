@@ -38,7 +38,7 @@ namespace CatchPhrase
             this.insert = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.delete = new System.Windows.Forms.Button();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -48,7 +48,7 @@ namespace CatchPhrase
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.button1);
+            this.panel1.Controls.Add(this.delete);
             this.panel1.Controls.Add(this.panel4);
             this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.change);
@@ -146,23 +146,24 @@ namespace CatchPhrase
             this.panel3.Size = new System.Drawing.Size(585, 381);
             this.panel3.TabIndex = 2;
             // 
-            // button1
+            // delete
             // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.button1.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.button1.Location = new System.Drawing.Point(10, 120);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(153, 45);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Добавить";
-            this.button1.UseVisualStyleBackColor = true;
+            this.delete.Dock = System.Windows.Forms.DockStyle.Top;
+            this.delete.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.delete.Location = new System.Drawing.Point(10, 130);
+            this.delete.Name = "delete";
+            this.delete.Size = new System.Drawing.Size(153, 45);
+            this.delete.TabIndex = 6;
+            this.delete.Text = "Удалить";
+            this.delete.UseVisualStyleBackColor = true;
+            this.delete.Click += new System.EventHandler(this.delete_Click);
             // 
             // panel4
             // 
             this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel4.Location = new System.Drawing.Point(10, 110);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(153, 10);
+            this.panel4.Size = new System.Drawing.Size(153, 20);
             this.panel4.TabIndex = 7;
             // 
             // FormAuthors
@@ -193,7 +194,7 @@ namespace CatchPhrase
         private System.Windows.Forms.Button change;
         private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button delete;
         private System.Windows.Forms.Panel panel4;
     }
 }

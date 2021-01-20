@@ -66,7 +66,7 @@ namespace CatchPhrase
                     grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
             // если была выделена строка, восстановим выделение
-            if (sel >= 0)
+            if (sel >= 0 && grid.Rows.Count>0)
                 grid.Rows[sel].Selected = true;
             // подпишимся заново на событие изменения содержимого редактируемой ячейки
             grid.CellEndEdit += GridOnCellEndEdit;
@@ -90,16 +90,18 @@ namespace CatchPhrase
         /// <summary> Добавление новой пустой записи в базу данных </summary>
         private void insert_Click(object sender, EventArgs e)
         {
+            new FormAuthorEdit().ShowDialog();
+            UpdateTable();
             // Создадим подключение к бд
-            using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
-            {
-                con.Open();// Откроем соединение
-                // Добавим пустую запись в таблицу Author
-                new SqlCommand($"INSERT INTO Author(Id,Name,Country) VALUES({grid.Rows.Count + 1},' ',' ')", con).ExecuteNonQuery();
-            }
-            UpdateTable();// Обновим содержимое таблицы
-            // Выделим последнюю строку таблицы (новая созданная запись)
-            grid.Rows[grid.RowCount - 1].Selected = true;
+            //using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
+            //{
+            //    con.Open();// Откроем соединение
+            //    // Добавим пустую запись в таблицу Author
+            //    new SqlCommand($"INSERT INTO Author(Id,Name,Country) VALUES({grid.Rows.Count + 1},' ',' ')", con).ExecuteNonQuery();
+            //}
+            //UpdateTable();// Обновим содержимое таблицы
+            //// Выделим последнюю строку таблицы (новая созданная запись)
+            //grid.Rows[grid.RowCount - 1].Selected = true;
         }
 
         /// <summary> Удаление выделенной записи </summary>
@@ -115,7 +117,29 @@ namespace CatchPhrase
 
         private void change_Click(object sender, EventArgs e)
         {
+            if (grid?.SelectedCells == null) return;
+            int id = (int) grid.SelectedCells[0].Value;
+            if (id < 1) return;
+            new FormAuthorEdit(id).ShowDialog();
+            UpdateTable();
+        }
 
+        private void delete_Click(object sender, EventArgs e)
+        {
+            if (grid?.SelectedCells == null) return;
+            int id = (int)grid.SelectedCells[0].Value;
+            if (id < 1) return;
+            if (MessageBox.Show($@"Вы хотите удалить автора: '{grid.SelectedCells[1].Value}'",
+                    @"Внимание", MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning) != DialogResult.Yes) return;
+            // Создадим подключение к бд
+            using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
+            {
+                con.Open(); // Откроем соединение
+                // Удалить запись из таблицы Author
+                new SqlCommand($"DELETE FROM Author WHERE Id={id}", con).ExecuteNonQuery();
+            }
+            UpdateTable(); // Обновим содержимое таблицы
         }
     }
 }

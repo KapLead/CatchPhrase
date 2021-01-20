@@ -6,10 +6,10 @@ using CatchPhrase.Properties;
 
 namespace CatchPhrase
 {
-    public partial class FormAuthorEdit : Form
+    public partial class FormTypePhraseEdit : Form
     {
         public int Id { get; private set; }
-        public FormAuthorEdit(int id = -1)
+        public FormTypePhraseEdit(int id = -1)
         {
             Id = id;
             InitializeComponent();
@@ -22,18 +22,16 @@ namespace CatchPhrase
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {
                 con.Open();// Откроем соединение
-                var adapter = new SqlDataAdapter($"SELECT * FROM Author WHERE Id={Id}", con);
+                var adapter = new SqlDataAdapter($"SELECT * FROM TypePhrase WHERE Id={Id}", con);
                 ;
                 var dat = new DataTable();
                 // заполним таблицу данными
                 adapter.Fill(dat);       // var result = new SqlCommand($"SELECT * FROM Author WHERE Id={Id}", con).ExecuteReader();
-                author.Text = dat.Rows[0][1].ToString();
-                country.Text = dat.Rows[0][2].ToString();
+                type.Text = dat.Rows[0][1].ToString();
                 }
             else
             {
-                author.Text = "";
-                country.Text = "";
+                type.Text = "";
             }
         }
 
@@ -43,15 +41,15 @@ namespace CatchPhrase
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {
                 con.Open();// Откроем соединение
-                // Добавим новую запись в таблицу Author
+                // Добавим новую запись в таблицу TypePhrase
                 if (Id < 1)
                 {
-                    new SqlCommand($"INSERT INTO Author(Name,Country) VALUES(N'{author.Text}',N'{country.Text}')", con)
+                    new SqlCommand($"INSERT INTO TypePhrase(Name) VALUES(N'{type.Text}')", con)
                         .ExecuteNonQuery();
                 }
                 else
                 // Обновим значение отредактированной ячейки
-                new SqlCommand($"UPDATE Author SET Name=N'{author.Text.Trim()}', Country=N'{country.Text.Trim()}' WHERE Id={Id}", con)
+                new SqlCommand($"UPDATE TypePhrase SET Name=N'{type.Text.Trim()}' WHERE Id={Id}", con)
                     .ExecuteNonQuery();
             }
             Close();
