@@ -10,7 +10,7 @@ namespace CatchPhrase
     {
         public int Id { get; private set; }
 
-        public FormPhraseEdit(int id)
+        public FormPhraseEdit(int id=-1)
         {
             Id = id;
             InitializeComponent();
@@ -52,24 +52,52 @@ namespace CatchPhrase
                 }
                 else
                 {
-
+                    int id = -1;
+                    if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[1].ToString()))
+                        id = int.Parse(dat.Rows[0].ItemArray[1].ToString());
+                    authors.SelectedIndex = id;
+                    if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[2].ToString()))
+                        id = int.Parse(dat.Rows[0].ItemArray[2].ToString());
+                    types.SelectedIndex = id;
                 }
             }
         }
 
         /// <summary> Обновление содержимого таблицы данными из бд </summary>
-        private void UpdateTable()
-        { 
+        //private void UpdateTable()
+        //{ 
+        //    // Создадим подключение к бд
+        //    using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
+        //    {
+        //        con.Open();// Откроем соединение
+        //        // Добавим пустую запись в таблицу Author
+        //        // new SqlCommand($"INSERT INTO Phrase(Id,Name,Country) VALUES({grid.Rows.Count + 1},' ',' ')", con).ExecuteNonQuery();
+        //    }
+        //}
+
+        private void save_Click(object sender, EventArgs e)
+        {
             // Создадим подключение к бд
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {
                 con.Open();// Откроем соединение
-                // Добавим пустую запись в таблицу Author
-                // new SqlCommand($"INSERT INTO Phrase(Id,Name,Country) VALUES({grid.Rows.Count + 1},' ',' ')", con).ExecuteNonQuery();
+
+                int id_author = authors.SelectedIndex >= 0 ? (int)((DataRowView)authors.Items[authors.SelectedIndex])[0]:-1;
+                int id_type = types.SelectedIndex >= 0 ? (int)((DataRowView)types.Items[types.SelectedIndex])[0]:-1;
+                if (Id < 1)
+                {
+                    // Добавим пустую запись в таблицу Phrase
+                    new SqlCommand($"INSERT INTO Phrase(Author_Id,TypePhrase_Id,Value) " +
+                                   $"VALUES({id_author},{id_type},N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
+                }
+                else
+                {
+                    new SqlCommand($"UPDATE Phrase SET Author_Id={id_author},TypePhrase_Id={id_type},Value=N'{Value.Text.Trim()}' " +
+                                   $"WHERE Id={Id}", con)
+                        .ExecuteNonQuery();
+                }
             }
-            UpdateTable();// Обновим содержимое таблицы
-            // Выделим последнюю строку таблицы (новая созданная запись)
-           // grid.Rows[grid.RowCount - 1].Selected = true;
+            Close();
         }
     }
 }

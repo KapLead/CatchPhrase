@@ -31,6 +31,7 @@ namespace CatchPhrase
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTypePhrases));
             this.panel1 = new System.Windows.Forms.Panel();
             this.back = new System.Windows.Forms.Button();
@@ -39,6 +40,8 @@ namespace CatchPhrase
             this.insert = new System.Windows.Forms.Button();
             this.grid = new System.Windows.Forms.DataGridView();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.change = new System.Windows.Forms.Button();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
             this.panel3.SuspendLayout();
@@ -47,21 +50,23 @@ namespace CatchPhrase
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.remote);
+            this.panel1.Controls.Add(this.panel4);
+            this.panel1.Controls.Add(this.change);
+            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.insert);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Padding = new System.Windows.Forms.Padding(10);
-            this.panel1.Size = new System.Drawing.Size(173, 372);
+            this.panel1.Size = new System.Drawing.Size(173, 371);
             this.panel1.TabIndex = 1;
             // 
             // back
             // 
             this.back.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.back.Location = new System.Drawing.Point(10, 317);
+            this.back.Location = new System.Drawing.Point(10, 316);
             this.back.Name = "back";
             this.back.Size = new System.Drawing.Size(153, 45);
             this.back.TabIndex = 5;
@@ -72,8 +77,8 @@ namespace CatchPhrase
             // remote
             // 
             this.remote.Dock = System.Windows.Forms.DockStyle.Top;
-            this.remote.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.remote.Location = new System.Drawing.Point(10, 65);
+            this.remote.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.remote.Location = new System.Drawing.Point(10, 130);
             this.remote.Name = "remote";
             this.remote.Size = new System.Drawing.Size(153, 45);
             this.remote.TabIndex = 4;
@@ -120,16 +125,25 @@ namespace CatchPhrase
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.grid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grid.DefaultCellStyle = dataGridViewCellStyle3;
             this.grid.Dock = System.Windows.Forms.DockStyle.Fill;
             this.grid.Location = new System.Drawing.Point(10, 10);
             this.grid.Name = "grid";
+            this.grid.ReadOnly = true;
             this.grid.RowHeadersVisible = false;
             this.grid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grid.ShowCellErrors = false;
             this.grid.ShowCellToolTips = false;
             this.grid.ShowEditingIcon = false;
             this.grid.ShowRowErrors = false;
-            this.grid.Size = new System.Drawing.Size(217, 352);
+            this.grid.Size = new System.Drawing.Size(216, 351);
             this.grid.TabIndex = 2;
             // 
             // panel3
@@ -140,17 +154,41 @@ namespace CatchPhrase
             this.panel3.Location = new System.Drawing.Point(173, 0);
             this.panel3.Name = "panel3";
             this.panel3.Padding = new System.Windows.Forms.Padding(10);
-            this.panel3.Size = new System.Drawing.Size(237, 372);
+            this.panel3.Size = new System.Drawing.Size(236, 371);
             this.panel3.TabIndex = 3;
+            // 
+            // change
+            // 
+            this.change.Dock = System.Windows.Forms.DockStyle.Top;
+            this.change.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.change.Location = new System.Drawing.Point(10, 65);
+            this.change.Name = "change";
+            this.change.Size = new System.Drawing.Size(153, 45);
+            this.change.TabIndex = 6;
+            this.change.Text = "Изменить";
+            this.change.UseVisualStyleBackColor = true;
+            this.change.Click += new System.EventHandler(this.change_Click);
+            // 
+            // panel4
+            // 
+            this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel4.Location = new System.Drawing.Point(10, 110);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(153, 20);
+            this.panel4.TabIndex = 7;
             // 
             // FormTypePhrases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(410, 372);
+            this.ClientSize = new System.Drawing.Size(409, 371);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(425, 410);
+            this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(425, 410);
             this.Name = "FormTypePhrases";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Типы и виды фраз";
@@ -171,5 +209,7 @@ namespace CatchPhrase
         private System.Windows.Forms.Button insert;
         private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.Button change;
     }
 }

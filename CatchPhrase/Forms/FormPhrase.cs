@@ -1,14 +1,9 @@
-﻿using System;
+﻿using CatchPhrase.Properties;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using CatchPhrase.Properties;
 
 namespace CatchPhrase
 {
@@ -45,6 +40,29 @@ namespace CatchPhrase
                     grid.Rows.Clear();
                     grid.Columns.Clear();
                 }
+
+                Dictionary<int,string> author = new Dictionary<int, string>();
+                var adapterauthor = new SqlDataAdapter("SELECT * FROM Author", con);
+                var datauthor = new DataTable();
+                // заполним таблицу данными
+                adapterauthor.Fill(datauthor);
+                foreach (DataRow row in datauthor.Rows)
+                    author.Add((int)row[0],(string)row[1]);
+
+                Dictionary<int, string> types = new Dictionary<int, string>();
+                var adaptertypes = new SqlDataAdapter("SELECT * FROM Author", con);
+                var dattypes = new DataTable();
+                // заполним таблицу данными
+                adapterauthor.Fill(dattypes);
+                foreach (DataRow row in dattypes.Rows)
+                    types.Add((int)row[0], (string)row[1]);
+
+                dat.Columns[1].DataType = dat.Columns[2].DataType = typeof(string);
+                foreach (DataRow row in dat.Rows)
+                {
+                    row[1] = author[(int) row[1]];
+                    row[2] = types[(int) row[2]];
+                }
                 // установим таблицу ресурсом данных для DataGridView
                 grid.DataSource = dat;
                 // если надо отобразим поле Id записи
@@ -60,10 +78,10 @@ namespace CatchPhrase
                 // установим наименования заголовков gridView
                 grid.Columns[1].HeaderText = @"Автор";
                 grid.Columns[2].HeaderText = @"Тип";
-                grid.Columns[2].HeaderText = @"Фраза";
+                grid.Columns[3].HeaderText = @"Фраза";
                 // Выровняем заголовки равномерно по ширине таблицы
-                grid.Columns[1].AutoSizeMode =
-                    grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.Columns[1].AutoSizeMode = grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             }
             // если была выделена строка, восстановим выделение
             if (sel >= 0)
@@ -90,14 +108,7 @@ namespace CatchPhrase
         /// <summary> Добавление новой пустой записи в базу данных </summary>
         private void insert_Click(object sender, EventArgs e)
         {
-            var newid = -1;
-            foreach (DataGridViewRow row in grid.Rows)
-            {
-                if ((int) row.Cells[0].Value > newid) 
-                    newid = (int) row.Cells[0].Value;
-            }
-            //if (newid > 0)
-            new FormPhraseEdit(newid).ShowDialog();
+            new FormPhraseEdit().ShowDialog();
         }
 
         /// <summary> Удаление выделенной записи </summary>
@@ -120,5 +131,16 @@ namespace CatchPhrase
             }
             UpdateTable();// Обновим содержимое таблицы
         }
+
+        private void change_Click(object sender, EventArgs e)
+        {
+            if (grid?.SelectedCells == null) return;
+            int id = (int)grid.SelectedCells[0].Value;
+            if (id < 1) return;
+            new FormPhraseEdit(id).ShowDialog();
+            UpdateTable();
+        }
     }
+
+
 }

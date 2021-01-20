@@ -21,18 +21,16 @@ namespace CatchPhrase
             // Создадим подключение к бд
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {
-                con.Open();// Откроем соединение
+                con.Open(); // Откроем соединение
                 var adapter = new SqlDataAdapter($"SELECT * FROM TypePhrase WHERE Id={Id}", con);
-                ;
-                var dat = new DataTable();
                 // заполним таблицу данными
-                adapter.Fill(dat);       // var result = new SqlCommand($"SELECT * FROM Author WHERE Id={Id}", con).ExecuteReader();
-                type.Text = dat.Rows[0][1].ToString();
-                }
-            else
-            {
-                type.Text = "";
+                var dat = new DataTable();
+                adapter.Fill(dat);
+                // если данные есть, заполним поля
+                if(dat.Rows.Count>0)
+                    type.Text = dat.Rows[0][1].ToString();
             }
+            else type.Text = "";
         }
 
         private void save_Click(object sender, EventArgs e)
@@ -41,16 +39,14 @@ namespace CatchPhrase
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {
                 con.Open();// Откроем соединение
-                // Добавим новую запись в таблицу TypePhrase
                 if (Id < 1)
-                {
-                    new SqlCommand($"INSERT INTO TypePhrase(Name) VALUES(N'{type.Text}')", con)
+                    // Добавим новую запись в таблицу TypePhrase
+                    new SqlCommand($"INSERT INTO TypePhrase(Name) VALUES(N'{type.Text.Trim()}')", con)
                         .ExecuteNonQuery();
-                }
                 else
-                // Обновим значение отредактированной ячейки
-                new SqlCommand($"UPDATE TypePhrase SET Name=N'{type.Text.Trim()}' WHERE Id={Id}", con)
-                    .ExecuteNonQuery();
+                    // Обновим значение отредактированной ячейки
+                    new SqlCommand($"UPDATE TypePhrase SET Name=N'{type.Text.Trim()}' WHERE Id={Id}", con)
+                        .ExecuteNonQuery();
             }
             Close();
         }

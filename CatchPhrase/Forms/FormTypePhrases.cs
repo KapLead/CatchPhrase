@@ -124,5 +124,14 @@ namespace CatchPhrase
         {
             Close();
         }
+
+        private void change_Click(object sender, EventArgs e)
+        {
+            if (grid?.SelectedCells == null) return;
+            int id = (int)grid.SelectedCells[0].Value;
+            if (id < 1) return;
+            new FormTypePhraseEdit(id).ShowDialog();
+            UpdateTable();
+        }
     }
 }

@@ -42,6 +42,8 @@ namespace CatchPhrase
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.change = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -52,8 +54,10 @@ namespace CatchPhrase
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.remote);
+            this.panel1.Controls.Add(this.panel5);
+            this.panel1.Controls.Add(this.change);
+            this.panel1.Controls.Add(this.back);
             this.panel1.Controls.Add(this.panel2);
             this.panel1.Controls.Add(this.insert);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
@@ -76,13 +80,14 @@ namespace CatchPhrase
             // remote
             // 
             this.remote.Dock = System.Windows.Forms.DockStyle.Top;
-            this.remote.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.remote.Location = new System.Drawing.Point(10, 65);
+            this.remote.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.remote.Location = new System.Drawing.Point(10, 120);
             this.remote.Name = "remote";
             this.remote.Size = new System.Drawing.Size(153, 45);
             this.remote.TabIndex = 4;
             this.remote.Text = "Удалить";
             this.remote.UseVisualStyleBackColor = true;
+            this.remote.Click += new System.EventHandler(this.remote_Click);
             // 
             // panel2
             // 
@@ -185,6 +190,26 @@ namespace CatchPhrase
             this.textBox1.TabIndex = 0;
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // change
+            // 
+            this.change.Dock = System.Windows.Forms.DockStyle.Top;
+            this.change.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.change.Location = new System.Drawing.Point(10, 65);
+            this.change.Name = "change";
+            this.change.Size = new System.Drawing.Size(153, 45);
+            this.change.TabIndex = 6;
+            this.change.Text = "Изменить";
+            this.change.UseVisualStyleBackColor = true;
+            this.change.Click += new System.EventHandler(this.change_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(10, 110);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(153, 10);
+            this.panel5.TabIndex = 7;
+            // 
             // FormPhrase
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -219,5 +244,7 @@ namespace CatchPhrase
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Button change;
     }
 }

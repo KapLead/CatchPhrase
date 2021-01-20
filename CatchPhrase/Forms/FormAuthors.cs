@@ -92,16 +92,6 @@ namespace CatchPhrase
         {
             new FormAuthorEdit().ShowDialog();
             UpdateTable();
-            // Создадим подключение к бд
-            //using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
-            //{
-            //    con.Open();// Откроем соединение
-            //    // Добавим пустую запись в таблицу Author
-            //    new SqlCommand($"INSERT INTO Author(Id,Name,Country) VALUES({grid.Rows.Count + 1},' ',' ')", con).ExecuteNonQuery();
-            //}
-            //UpdateTable();// Обновим содержимое таблицы
-            //// Выделим последнюю строку таблицы (новая созданная запись)
-            //grid.Rows[grid.RowCount - 1].Selected = true;
         }
 
         /// <summary> Удаление выделенной записи </summary>
