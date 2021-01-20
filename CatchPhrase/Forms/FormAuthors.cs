@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Security;
 using System.Windows.Forms;
 
 namespace CatchPhrase
@@ -80,7 +81,7 @@ namespace CatchPhrase
                 con.Open(); // Откроем соединение
                 // Обновим значение отредактированной ячейки
                 new SqlCommand($"UPDATE Author SET {grid.Columns[e.ColumnIndex].Name}" +
-                               $"='{grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value}' " +
+                               $"=N'{grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value}' " +
                                $"WHERE Id={grid.Rows[e.RowIndex].Cells[0].Value}", con)
                     .ExecuteNonQuery();
             }

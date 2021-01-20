@@ -23,5 +23,12 @@ namespace CatchPhrase
             new FormAuthors().ShowDialog();
             Show();
         }
+
+        private void types_Click(object sender, EventArgs e)
+        {
+            Hide();
+            new FormTypePhrases().ShowDialog();
+            Show();
+        }
     }
 }

@@ -65,6 +65,7 @@ namespace CatchPhrase
             this.types.TabIndex = 2;
             this.types.Text = "Типы и виды фраз";
             this.types.UseVisualStyleBackColor = true;
+            this.types.Click += new System.EventHandler(this.types_Click);
             // 
             // button2
             // 

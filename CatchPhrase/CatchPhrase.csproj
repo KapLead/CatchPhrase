@@ -62,10 +62,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormAuthors.cs">
+    <Compile Include="Forms\FormAuthors.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormAuthors.Designer.cs">
+    <Compile Include="Forms\FormAuthors.Designer.cs">
       <DependentUpon>FormAuthors.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FormMenu.cs">
@@ -74,13 +74,22 @@
     <Compile Include="Forms\FormMenu.Designer.cs">
       <DependentUpon>FormMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormTypePhrases.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormTypePhrases.Designer.cs">
+      <DependentUpon>FormTypePhrases.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormAuthors.resx">
+    <EmbeddedResource Include="Forms\FormAuthors.resx">
       <DependentUpon>FormAuthors.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormMenu.resx">
       <DependentUpon>FormMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormTypePhrases.resx">
+      <DependentUpon>FormTypePhrases.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -118,12 +127,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="phrases.mdf">
+    <Content Include="phrase.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="phrases_log.ldf">
-      <DependentUpon>phrases.mdf</DependentUpon>
+    <Content Include="phrase_log.ldf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <DependentUpon>phrase.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
