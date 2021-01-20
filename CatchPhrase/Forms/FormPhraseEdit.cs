@@ -45,8 +45,8 @@ namespace CatchPhrase
                 if (dat.Rows.Count == 0)
                 {
                     if (Id==-1) Id=1;
-                    new SqlCommand($"INSERT INTO Phrase(Id,Author_Id,TypePhrase_Id,Value) VALUES({Id},0,0,' ')", con)
-                        .ExecuteNonQuery();
+                    var ret = new SqlCommand($"INSERT INTO Phrase(Author_Id,TypePhrase_Id,Value) VALUES(NULL,NULL,NULL)", con)
+                        .ExecuteScalar();
                     authors.SelectedIndex = types.SelectedIndex = -1;
                     Value.Text = "";
                 }

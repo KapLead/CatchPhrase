@@ -105,22 +105,17 @@ namespace CatchPhrase
         /// <summary> Удаление выделенной записи </summary>
         private void remote_Click(object sender, EventArgs e)
         {
-            // получить Id удаляемой записи
-            int selId = grid.CurrentRow?.Index ?? 0;
-            // выйти если не выделена строка
-            if (selId < 1) return;
-            // спросить пользователя разрешение на даление записи
-            if (MessageBox.Show($@"Удалить автора : '{grid.CurrentRow?.Cells[1]}:{grid.CurrentRow?.Cells[2]}'",
-                    @"Внимание...", MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning) != DialogResult.Yes) return;
-            // Создадим подключение к бд
-            using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
-            {
-                con.Open();// Откроем соединение
-                // Добавим пустую запись в таблицу Author
-                new SqlCommand($"DELETE FROM Author WHERE Id={selId}", con).ExecuteNonQuery();
-            }
-            UpdateTable();// Обновим содержимое таблицы
+
+        }
+
+        private void grid_SelectionChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void change_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
