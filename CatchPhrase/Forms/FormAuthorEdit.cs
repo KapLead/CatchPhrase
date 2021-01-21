@@ -29,7 +29,7 @@ namespace CatchPhrase
                 adapter.Fill(dat);       // var result = new SqlCommand($"SELECT * FROM Author WHERE Id={Id}", con).ExecuteReader();
                 author.Text = dat.Rows[0][1].ToString();
                 country.Text = dat.Rows[0][2].ToString();
-                }
+            }
             else
             {
                 author.Text = "";

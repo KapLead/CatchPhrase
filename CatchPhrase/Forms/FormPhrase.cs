@@ -42,22 +42,27 @@ namespace CatchPhrase
                     grid.Columns.Clear();
                 }
 
+                #region Сопоставление связей таблицы
+                // временное хранилище словаря id:автор
                 Dictionary<int,string> author = new Dictionary<int, string>();
+                // получить всех авторов и их id
                 var adapterauthor = new SqlDataAdapter("SELECT * FROM Author", con);
                 var datauthor = new DataTable();
                 // заполним таблицу данными
                 adapterauthor.Fill(datauthor);
+                // заполнение хранилища временными данными
                 foreach (DataRow row in datauthor.Rows)
                     author.Add((int)row[0],(string)row[1]);
-
+                // временное хранилище словаря id:типы
                 Dictionary<int, string> types = new Dictionary<int, string>();
                 var adaptertypes = new SqlDataAdapter("SELECT * FROM TypePhrase", con);
                 var dattypes = new DataTable();
                 // заполним таблицу данными
                 adaptertypes.Fill(dattypes);
+                // заполнение хранилища временными данными
                 foreach (DataRow row in dattypes.Rows)
                     types.Add((int)row[0], (string)row[1]);
-
+                // установим наименования заголовков gridView
                 dat.Columns.Add(" Автор", typeof(string));
                 dat.Columns.Add(" Тип", typeof(string));
                 foreach (DataRow row in dat.Rows)
@@ -67,6 +72,9 @@ namespace CatchPhrase
                     if (row[2].ToString() != "" && types.ContainsKey((int)row[2]))
                         row[dat.Columns.Count-1] = types[(int)row[2]];
                 }
+
+                #endregion
+     
                 // установим таблицу ресурсом данных для DataGridView
                 grid.DataSource = dat;
                 // если надо отобразим поле Id записи
@@ -79,9 +87,9 @@ namespace CatchPhrase
                 }
                 else // иначе спрячем колонку с id
                     grid.Columns[0].Visible = false;
-                // установим наименования заголовков gridView
-                grid.Columns[1].Visible = false;// @"Автор";
-                grid.Columns[2].Visible = false;// .HeaderText = @"Тип";
+                // скрыть столбцы связей
+                grid.Columns[1].Visible = false;// Автор
+                grid.Columns[2].Visible = false;// Тип
                 grid.Columns[3].HeaderText = @"Фраза";
                 // Выровняем заголовки равномерно по ширине таблицы
                 grid.Columns[grid.Columns.Count-2].AutoSizeMode = 
@@ -126,9 +134,9 @@ namespace CatchPhrase
             // получить Id удаляемой записи
             int selId = grid.CurrentRow?.Index ?? 0;
             // выйти если не выделена строка
-            if (selId < 1) return;
+            if (selId < 0) return;
             // спросить пользователя разрешение на даление записи
-            if (MessageBox.Show($@"Удалить автора : '{grid.CurrentRow?.Cells[1]}:{grid.CurrentRow?.Cells[2]}'",
+            if (MessageBox.Show($@"Удалить фразу : '{grid.CurrentRow?.Cells[3].Value}' ?",
                     @"Внимание...", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning) != DialogResult.Yes) return;
             // Создадим подключение к бд
@@ -149,6 +157,7 @@ namespace CatchPhrase
             if (id < 1) return;
             // открыть окно редактирования записи для правки
             new FormPhraseEdit(id).ShowDialog();
+            // обновить содержимое таблицы
             UpdateTable();
         }
 
@@ -158,8 +167,10 @@ namespace CatchPhrase
             Close();
         }
 
+        /// <summary> обновление содержимого таблицы в соответствии с содержимым поля поиска </summary>
         private void find_TextChanged(object sender, EventArgs e)
         {
+            // обновить содержимое таблицы
             UpdateTable();
         }
     }

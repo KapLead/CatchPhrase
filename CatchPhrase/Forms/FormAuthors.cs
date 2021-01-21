@@ -127,7 +127,15 @@ namespace CatchPhrase
             {
                 con.Open(); // Откроем соединение
                 // Удалить запись из таблицы Author
-                new SqlCommand($"DELETE FROM Author WHERE Id={id}", con).ExecuteNonQuery();
+                try
+                {
+                    new SqlCommand($"DELETE FROM Author WHERE Id={id}", con).ExecuteNonQuery();
+                }
+                catch
+                {
+                    MessageBox.Show(@"У данного автора имеются фразы. Предварительно удалите фразы данного автора",
+                        @"Удаление запрещено!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             UpdateTable(); // Обновим содержимое таблицы
         }
