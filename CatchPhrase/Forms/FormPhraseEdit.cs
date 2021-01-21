@@ -39,26 +39,35 @@ namespace CatchPhrase
                 types.DisplayMember = "Name";
                 types.ValueMember = "Id";
                 // установим таблицу ресурсом данных для DataGridView
-                adapter = new SqlDataAdapter("SELECT * FROM Phrase WHERE Id="+Id, con);
-                var dat = new DataTable();
-                adapter.Fill(dat);
-                if (dat.Rows.Count == 0)
+                if (Id > 0)
                 {
-                    if (Id==-1) Id=1;
-                    var ret = new SqlCommand($"INSERT INTO Phrase(Author_Id,TypePhrase_Id,Value) VALUES(NULL,NULL,NULL)", con)
-                        .ExecuteScalar();
-                    authors.SelectedIndex = types.SelectedIndex = -1;
-                    Value.Text = "";
+                    adapter = new SqlDataAdapter("SELECT * FROM Phrase WHERE Id=" + Id, con);
+                    var dat = new DataTable();
+                    adapter.Fill(dat);
+                    if (dat.Rows.Count == 0)
+                    {
+                        if (Id == -1) Id = 1;
+                        var ret = new SqlCommand($"INSERT INTO Phrase(Author_Id,TypePhrase_Id,Value) VALUES(NULL,NULL,NULL)", con)
+                            .ExecuteScalar();
+                        authors.SelectedIndex = types.SelectedIndex = -1;
+                        Value.Text = "";
+                    }
+                    else
+                    {
+                        int id = -1;
+                        if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[1].ToString()))
+                            id = int.Parse(dat.Rows[0].ItemArray[1].ToString());
+                        authors.SelectedIndex = id;
+                        if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[2].ToString()))
+                            id = int.Parse(dat.Rows[0].ItemArray[2].ToString());
+                        types.SelectedIndex = id;
+                        Value.Text = dat.Rows[0]["Value"].ToString();
+                    }
                 }
                 else
                 {
-                    int id = -1;
-                    if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[1].ToString()))
-                        id = int.Parse(dat.Rows[0].ItemArray[1].ToString());
-                    authors.SelectedIndex = id;
-                    if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[2].ToString()))
-                        id = int.Parse(dat.Rows[0].ItemArray[2].ToString());
-                    types.SelectedIndex = id;
+                    Value.Text = "";
+                    authors.SelectedIndex = types.SelectedIndex = -1;
                 }
             }
         }
@@ -87,13 +96,15 @@ namespace CatchPhrase
                 if (Id < 1)
                 {
                     // Добавим пустую запись в таблицу Phrase
-                    new SqlCommand($"INSERT INTO Phrase(Author_Id,TypePhrase_Id,Value) " +
-                                   $"VALUES({id_author},{id_type},N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
+                    new SqlCommand($"INSERT INTO Phrase({(id_author>0?"Author_Id,":"")}{(id_type>0?"TypePhrase_Id,":"")}Value) " +
+                                   $"VALUES({(id_author>0?$"{id_author},":null)}{(id_type>0?$"{id_type},":null)}N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
                 }
                 else
                 {
-                    new SqlCommand($"UPDATE Phrase SET Author_Id={id_author},TypePhrase_Id={id_type},Value=N'{Value.Text.Trim()}' " +
-                                   $"WHERE Id={Id}", con)
+                    new SqlCommand($"UPDATE Phrase SET " +
+                        $"{(id_author>0?"Author_Id="+id_author+",":"")}" +
+                        $"{(id_type>0?"TypePhrase_Id="+id_type+",":"")}" +
+                        $"Value=N'{Value.Text.Trim()}' WHERE Id={Id}", con)
                         .ExecuteNonQuery();
                 }
             }

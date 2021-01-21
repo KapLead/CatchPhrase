@@ -33,17 +33,17 @@ namespace CatchPhrase
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPhrase));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.back = new System.Windows.Forms.Button();
             this.remote = new System.Windows.Forms.Button();
+            this.panel5 = new System.Windows.Forms.Panel();
+            this.change = new System.Windows.Forms.Button();
+            this.back = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.insert = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.grid = new System.Windows.Forms.DataGridView();
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.change = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.find = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -67,16 +67,6 @@ namespace CatchPhrase
             this.panel1.Size = new System.Drawing.Size(173, 396);
             this.panel1.TabIndex = 1;
             // 
-            // back
-            // 
-            this.back.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.back.Location = new System.Drawing.Point(10, 341);
-            this.back.Name = "back";
-            this.back.Size = new System.Drawing.Size(153, 45);
-            this.back.TabIndex = 5;
-            this.back.Text = "Назад";
-            this.back.UseVisualStyleBackColor = true;
-            // 
             // remote
             // 
             this.remote.Dock = System.Windows.Forms.DockStyle.Top;
@@ -88,6 +78,37 @@ namespace CatchPhrase
             this.remote.Text = "Удалить";
             this.remote.UseVisualStyleBackColor = true;
             this.remote.Click += new System.EventHandler(this.remote_Click);
+            // 
+            // panel5
+            // 
+            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel5.Location = new System.Drawing.Point(10, 110);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(153, 10);
+            this.panel5.TabIndex = 7;
+            // 
+            // change
+            // 
+            this.change.Dock = System.Windows.Forms.DockStyle.Top;
+            this.change.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.change.Location = new System.Drawing.Point(10, 65);
+            this.change.Name = "change";
+            this.change.Size = new System.Drawing.Size(153, 45);
+            this.change.TabIndex = 6;
+            this.change.Text = "Изменить";
+            this.change.UseVisualStyleBackColor = true;
+            this.change.Click += new System.EventHandler(this.change_Click);
+            // 
+            // back
+            // 
+            this.back.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.back.Location = new System.Drawing.Point(10, 341);
+            this.back.Name = "back";
+            this.back.Size = new System.Drawing.Size(153, 45);
+            this.back.TabIndex = 5;
+            this.back.Text = "Назад";
+            this.back.UseVisualStyleBackColor = true;
+            this.back.Click += new System.EventHandler(this.back_Click);
             // 
             // panel2
             // 
@@ -171,7 +192,7 @@ namespace CatchPhrase
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.textBox1);
+            this.groupBox1.Controls.Add(this.find);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
@@ -180,35 +201,16 @@ namespace CatchPhrase
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Поиск";
             // 
-            // textBox1
+            // find
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.find.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(114, 18);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(343, 20);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // change
-            // 
-            this.change.Dock = System.Windows.Forms.DockStyle.Top;
-            this.change.Font = new System.Drawing.Font("Arial Narrow", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.change.Location = new System.Drawing.Point(10, 65);
-            this.change.Name = "change";
-            this.change.Size = new System.Drawing.Size(153, 45);
-            this.change.TabIndex = 6;
-            this.change.Text = "Изменить";
-            this.change.UseVisualStyleBackColor = true;
-            this.change.Click += new System.EventHandler(this.change_Click);
-            // 
-            // panel5
-            // 
-            this.panel5.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel5.Location = new System.Drawing.Point(10, 110);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(153, 10);
-            this.panel5.TabIndex = 7;
+            this.find.Location = new System.Drawing.Point(114, 18);
+            this.find.Name = "find";
+            this.find.Size = new System.Drawing.Size(343, 20);
+            this.find.TabIndex = 0;
+            this.find.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.find.TextChanged += new System.EventHandler(this.find_TextChanged);
             // 
             // FormPhrase
             // 
@@ -243,7 +245,7 @@ namespace CatchPhrase
         private System.Windows.Forms.DataGridView grid;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox find;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button change;
     }

@@ -167,11 +167,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="output.ico" />
-    <Content Include="phrase.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <Content Include="phrase.mdf" />
     <Content Include="phrase_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>phrase.mdf</DependentUpon>
     </Content>
   </ItemGroup>

@@ -31,7 +31,8 @@ namespace CatchPhrase
             {
                 con.Open(); // Откроем соединение
                 // Считаем требуемую таблицу
-                var adapter = new SqlDataAdapter("SELECT * FROM Phrase", con);
+                var adapter = new SqlDataAdapter("SELECT * FROM Phrase"+
+                    (find.Text!=""?$" WHERE Value LIKE N'%{find.Text.Trim()}%'":""), con);
                 var dat = new DataTable();
                 // заполним таблицу данными
                 adapter.Fill(dat);
@@ -50,18 +51,21 @@ namespace CatchPhrase
                     author.Add((int)row[0],(string)row[1]);
 
                 Dictionary<int, string> types = new Dictionary<int, string>();
-                var adaptertypes = new SqlDataAdapter("SELECT * FROM Author", con);
+                var adaptertypes = new SqlDataAdapter("SELECT * FROM TypePhrase", con);
                 var dattypes = new DataTable();
                 // заполним таблицу данными
-                adapterauthor.Fill(dattypes);
+                adaptertypes.Fill(dattypes);
                 foreach (DataRow row in dattypes.Rows)
                     types.Add((int)row[0], (string)row[1]);
 
-                dat.Columns[1].DataType = dat.Columns[2].DataType = typeof(string);
+                dat.Columns.Add(" Автор", typeof(string));
+                dat.Columns.Add(" Тип", typeof(string));
                 foreach (DataRow row in dat.Rows)
                 {
-                    row[1] = author[(int) row[1]];
-                    row[2] = types[(int) row[2]];
+                    if(row[1].ToString()!="" && author.ContainsKey((int)row[1]))
+                        row[dat.Columns.Count-2] = author[(int)row[1]];
+                    if (row[2].ToString() != "" && types.ContainsKey((int)row[2]))
+                        row[dat.Columns.Count-1] = types[(int)row[2]];
                 }
                 // установим таблицу ресурсом данных для DataGridView
                 grid.DataSource = dat;
@@ -76,15 +80,18 @@ namespace CatchPhrase
                 else // иначе спрячем колонку с id
                     grid.Columns[0].Visible = false;
                 // установим наименования заголовков gridView
-                grid.Columns[1].HeaderText = @"Автор";
-                grid.Columns[2].HeaderText = @"Тип";
+                grid.Columns[1].Visible = false;// @"Автор";
+                grid.Columns[2].Visible = false;// .HeaderText = @"Тип";
                 grid.Columns[3].HeaderText = @"Фраза";
                 // Выровняем заголовки равномерно по ширине таблицы
-                grid.Columns[1].AutoSizeMode = grid.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+                grid.Columns[grid.Columns.Count-2].AutoSizeMode = 
+                grid.Columns[grid.Columns.Count-1].AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
                 grid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                grid.Columns[grid.Columns.Count - 1].DefaultCellStyle.Alignment = 
+                grid.Columns[grid.Columns.Count - 2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             }
             // если была выделена строка, восстановим выделение
-            if (sel >= 0)
+            if (sel >= 0 && grid.Rows.Count>sel)
                 grid.Rows[sel].Selected = true;
             // подпишимся заново на событие изменения содержимого редактируемой ячейки
             grid.CellEndEdit += GridOnCellEndEdit;
@@ -108,7 +115,9 @@ namespace CatchPhrase
         /// <summary> Добавление новой пустой записи в базу данных </summary>
         private void insert_Click(object sender, EventArgs e)
         {
+            // открыть окно редактирования записи для создания новой записи
             new FormPhraseEdit().ShowDialog();
+            UpdateTable();// Обновим содержимое таблицы
         }
 
         /// <summary> Удаление выделенной записи </summary>
@@ -134,10 +143,23 @@ namespace CatchPhrase
 
         private void change_Click(object sender, EventArgs e)
         {
+            // получить Id выделенной записи
             if (grid?.SelectedCells == null) return;
             int id = (int)grid.SelectedCells[0].Value;
             if (id < 1) return;
+            // открыть окно редактирования записи для правки
             new FormPhraseEdit(id).ShowDialog();
+            UpdateTable();
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            // Закрыть окно
+            Close();
+        }
+
+        private void find_TextChanged(object sender, EventArgs e)
+        {
             UpdateTable();
         }
     }
