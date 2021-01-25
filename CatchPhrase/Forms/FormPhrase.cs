@@ -132,7 +132,7 @@ namespace CatchPhrase
         private void remote_Click(object sender, EventArgs e)
         {
             // получить Id удаляемой записи
-            int selId = grid.CurrentRow?.Index ?? 0;
+            int selId = (int)grid.CurrentRow.Cells[0].Value;
             // выйти если не выделена строка
             if (selId < 0) return;
             // спросить пользователя разрешение на даление записи

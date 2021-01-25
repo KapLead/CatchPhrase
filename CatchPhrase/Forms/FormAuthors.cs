@@ -41,16 +41,14 @@ namespace CatchPhrase
                 var dat = new DataTable();
                 // заполним таблицу данными
                 adapter.Fill(dat);
-                if (grid.DataSource == null)
-                {
+                if (grid.DataSource == null) {
                     grid.Rows.Clear();
                     grid.Columns.Clear();
                 }
                 // установим таблицу ресурсом данных для DataGridView
                 grid.DataSource = dat;
                 // если надо отобразим поле Id записи
-                if (Settings.Default.ShowIdTables)
-                {
+                if (Settings.Default.ShowIdTables) {
                     // Установим факсированную длину столбца
                     grid.Columns[0].Width = 25;
                     // Поле Id - только чтение

@@ -19,20 +19,14 @@ namespace CatchPhrase
 
         /// <summary> Открыть форму авторов </summary>
         private void authors_Click(object sender, EventArgs e)
-        {
-            new FormAuthors().ShowDialog();
-        }
+        { new FormAuthors().ShowDialog(); }
 
         /// <summary> Открыть форму типов </summary>
         private void types_Click(object sender, EventArgs e)
-        {
-            new FormTypePhrases().ShowDialog();
-        }
+        { new FormTypePhrases().ShowDialog(); }
 
         /// <summary> Открыть форму фраз </summary>
         private void phrase_Click(object sender, EventArgs e)
-        {
-            new FormPhrase().ShowDialog();
-        }
+        { new FormPhrase().ShowDialog(); }
     }
 }

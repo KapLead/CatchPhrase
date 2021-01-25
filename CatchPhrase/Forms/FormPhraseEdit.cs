@@ -108,8 +108,10 @@ namespace CatchPhrase
                 if (Id < 1)
                 {
                     // Добавим пустую запись в таблицу Phrase
-                    new SqlCommand($"INSERT INTO Phrase({(id_author>0?"Author_Id,":"")}{(id_type>0?"TypePhrase_Id,":"")}Value) " +
-                                   $"VALUES({(id_author>0?$"{id_author},":null)}{(id_type>0?$"{id_type},":null)}N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
+                    new SqlCommand($"INSERT INTO Phrase({(id_author>0?"Author_Id,":"")}" +
+                                   $"{(id_type>0?"TypePhrase_Id,":"")}Value) " +
+                                   $"VALUES({(id_author>0?$"{id_author},":null)}{(id_type>0?$"{id_type},":null)}" +
+                                   $"N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
                 }
                 else
                 {
