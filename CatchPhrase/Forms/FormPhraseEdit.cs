@@ -127,6 +127,7 @@ namespace CatchPhrase
                                    $"{(id_type>0?"TypePhrase_Id,":"")}Value) " +
                                    $"VALUES({(id_author>0?$"{id_author},":null)}{(id_type>0?$"{id_type},":null)}" +
                                    $"N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
+
                 }
                 else
                 {
