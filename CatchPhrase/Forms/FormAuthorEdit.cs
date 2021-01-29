@@ -39,6 +39,16 @@ namespace CatchPhrase
 
         private void save_Click(object sender, EventArgs e)
         {
+            if(string.IsNullOrWhiteSpace(author.Text))
+            {
+                MessageBox.Show("Поле 'Автор' имеет недопустимые значения", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(country.Text))
+            {
+                MessageBox.Show("Поле 'страна' имеет недопустимые значения", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // Создадим подключение к бд
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {
