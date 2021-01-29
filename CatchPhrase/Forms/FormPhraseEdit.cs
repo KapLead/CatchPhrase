@@ -93,6 +93,21 @@ namespace CatchPhrase
 
                 int id_author = authors.SelectedIndex >= 0 ? (int)((DataRowView)authors.Items[authors.SelectedIndex])[0]:-1;
                 int id_type = types.SelectedIndex >= 0 ? (int)((DataRowView)types.Items[types.SelectedIndex])[0]:-1;
+                if (id_author<0)
+                {
+                    MessageBox.Show("'Автор' не выбран", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (id_type<0)
+                {
+                    MessageBox.Show("'Тип' не выбран", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(Value.Text))
+                {
+                    MessageBox.Show("Поле 'Фраза' имеет недопустимое значение", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 if (Id < 1)
                 {
                     // Добавим пустую запись в таблицу Phrase

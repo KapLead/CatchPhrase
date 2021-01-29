@@ -44,6 +44,7 @@ namespace CatchPhrase
             this.panel4 = new System.Windows.Forms.Panel();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.find = new System.Windows.Forms.TextBox();
+            this.filtrWhere = new System.Windows.Forms.ComboBox();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
@@ -192,6 +193,7 @@ namespace CatchPhrase
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.filtrWhere);
             this.groupBox1.Controls.Add(this.find);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
@@ -205,12 +207,26 @@ namespace CatchPhrase
             // 
             this.find.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.find.Location = new System.Drawing.Point(114, 18);
+            this.find.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.75F);
+            this.find.Location = new System.Drawing.Point(62, 18);
             this.find.Name = "find";
-            this.find.Size = new System.Drawing.Size(343, 20);
+            this.find.Size = new System.Drawing.Size(350, 21);
             this.find.TabIndex = 0;
             this.find.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.find.TextChanged += new System.EventHandler(this.find_TextChanged);
+            // 
+            // filtrWhere
+            // 
+            this.filtrWhere.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.filtrWhere.FormattingEnabled = true;
+            this.filtrWhere.Items.AddRange(new object[] {
+            "По фразе",
+            "По автору",
+            "По типу"});
+            this.filtrWhere.Location = new System.Drawing.Point(417, 18);
+            this.filtrWhere.Name = "filtrWhere";
+            this.filtrWhere.Size = new System.Drawing.Size(164, 21);
+            this.filtrWhere.TabIndex = 1;
             // 
             // FormPhrase
             // 
@@ -248,5 +264,6 @@ namespace CatchPhrase
         private System.Windows.Forms.TextBox find;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Button change;
+        private System.Windows.Forms.ComboBox filtrWhere;
     }
 }

@@ -17,6 +17,7 @@ namespace CatchPhrase
         private void FormPhrase_Load(object sender, EventArgs e)
         {
             UpdateTable();
+            filtrWhere.SelectedIndex = 0;
         }
 
         /// <summary> Обновление содержимого таблицы данными из бд </summary>
@@ -31,8 +32,8 @@ namespace CatchPhrase
             {
                 con.Open(); // Откроем соединение
                 // Считаем требуемую таблицу
-                var adapter = new SqlDataAdapter("SELECT * FROM Phrase"+
-                    (find.Text!=""?$" WHERE Value LIKE N'%{find.Text.Trim()}%'":""), con);
+                string tableName = filtrWhere.SelectedIndex == 0 ? $" WHERE Value LIKE N'%{find.Text.Trim()}%'" : "";
+                var adapter = new SqlDataAdapter("SELECT * FROM Phrase"+(find.Text!=""?tableName:""), con);
                 var dat = new DataTable();
                 // заполним таблицу данными
                 adapter.Fill(dat);
@@ -64,6 +65,7 @@ namespace CatchPhrase
                 {
                     if(row[1].ToString()!="" && author.ContainsKey((int)row[1]))
                         row[dat.Columns.Count-2] = author[(int)row[1]];
+
                     if (row[2].ToString() != "" && types.ContainsKey((int)row[2]))
                         row[dat.Columns.Count-1] = types[(int)row[2]];
                 }
@@ -89,6 +91,22 @@ namespace CatchPhrase
                 grid.Columns[3].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 grid.Columns[grid.Columns.Count - 1].DefaultCellStyle.Alignment = 
                 grid.Columns[grid.Columns.Count - 2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                if (filtrWhere.SelectedIndex != 0)
+                    for(int i=dat.Rows.Count-1;i>=0;i--)
+                    {
+                        if (filtrWhere.SelectedIndex == 1)
+                        {
+                            // фильтр по автору
+                            if(!dat.Rows[i][grid.Columns.Count - 2].ToString().Contains(find.Text))
+                                dat.Rows.RemoveAt(i);
+                        }
+                        else
+                        {
+                            if (!dat.Rows[i][grid.Columns.Count - 1].ToString().Contains(find.Text))
+                                dat.Rows.RemoveAt(i);
+                        }
+                    }
             }
             // если была выделена строка, восстановим выделение
             if (sel >= 0 && grid.Rows.Count>sel)

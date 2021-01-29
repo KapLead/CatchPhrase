@@ -35,6 +35,11 @@ namespace CatchPhrase
 
         private void save_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrWhiteSpace(type.Text))
+            {
+                MessageBox.Show("Поле 'Тип' имеет недопустимое значение", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
             // Создадим подключение к бд
             using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
             {

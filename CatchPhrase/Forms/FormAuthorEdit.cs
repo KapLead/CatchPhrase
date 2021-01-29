@@ -41,12 +41,12 @@ namespace CatchPhrase
         {
             if(string.IsNullOrWhiteSpace(author.Text))
             {
-                MessageBox.Show("Поле 'Автор' имеет недопустимые значения", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Поле 'Автор' имеет недопустимое значение", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             if (string.IsNullOrWhiteSpace(country.Text))
             {
-                MessageBox.Show("Поле 'страна' имеет недопустимые значения", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Поле 'страна' имеет недопустимое значение", "Недопустимое значение", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
             // Создадим подключение к бд
