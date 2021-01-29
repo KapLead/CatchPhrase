@@ -62,7 +62,7 @@ namespace CatchPhrase
 
             // если была выделена строка, восстановим выделение
             if (sel >= 0)
-                grid.Rows[sel].Selected = true;
+                grid.Rows[sel>=grid.RowCount?grid.RowCount-1:sel].Selected = true;
             // подпишимся заново на событие изменения содержимого редактируемой ячейки
             grid.CellEndEdit += GridOnCellEndEdit;
         }
@@ -85,15 +85,7 @@ namespace CatchPhrase
         /// <summary> Добавление новой пустой записи в базу данных </summary>
         private void insert_Click(object sender, EventArgs e)
         {
-            // Создадим подключение к бд
-            using (SqlConnection con = new SqlConnection(Settings.Default.ConnectionString))
-            {
-                con.Open(); // Откроем соединение
-                // Добавим пустую запись в таблицу Author
-                new SqlCommand($"INSERT INTO TypePhrase(Name) VALUES(N' ')", con)
-                    .ExecuteNonQuery();
-            }
-
+            new FormTypePhraseEdit().ShowDialog();
             UpdateTable(); // Обновим содержимое таблицы
             // Выделим последнюю строку таблицы (новая созданная запись)
             grid.Rows[grid.RowCount - 1].Selected = true;
@@ -103,11 +95,11 @@ namespace CatchPhrase
         private void remote_Click(object sender, EventArgs e)
         {
             // получить Id удаляемой записи
-            int selId = grid.CurrentRow?.Index ?? 0;
+            int selId = (int)grid.SelectedRows[0]?.Cells[0]?.Value;
             // выйти если не выделена строка
             if (selId < 1) return;
             // спросить пользователя разрешение на даление записи
-            if (MessageBox.Show($@"Удалить тип - '{grid.CurrentRow?.Cells[1]}' ?",
+            if (MessageBox.Show($@"Удалить тип - Id={selId}, Name='{grid.SelectedRows[0]?.Cells[1].Value}' ?",
                     @"Внимание...", MessageBoxButtons.YesNo,
                     MessageBoxIcon.Warning) != DialogResult.Yes) return;
             // Создадим подключение к бд
@@ -115,7 +107,15 @@ namespace CatchPhrase
             {
                 con.Open(); // Откроем соединение
                 // Добавим пустую запись в таблицу Author
-                new SqlCommand($"DELETE FROM TypePhrase WHERE Id={selId}", con).ExecuteNonQuery();
+                try
+                {
+                    new SqlCommand($"DELETE FROM TypePhrase WHERE Id={selId}", con).ExecuteNonQuery();
+                }
+                catch
+                {
+                    MessageBox.Show(@"У данного типа имеются фразы. Предварительно удалите фразы данного типа!",
+                        @"Удаление запрещено!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             UpdateTable(); // Обновим содержимое таблицы
         }

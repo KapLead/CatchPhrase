@@ -57,10 +57,10 @@ namespace CatchPhrase
                         int id = -1;
                         if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[1].ToString()))
                             id = int.Parse(dat.Rows[0].ItemArray[1].ToString());
-                        authors.SelectedIndex = id;
+                        comboBox_selectId(authors,id);
                         if (!string.IsNullOrEmpty(dat.Rows[0].ItemArray[2].ToString()))
                             id = int.Parse(dat.Rows[0].ItemArray[2].ToString());
-                        types.SelectedIndex = id;
+                        comboBox_selectId(types,id);
                         Value.Text = dat.Rows[0]["Value"].ToString();
                     }
                 }
@@ -68,6 +68,18 @@ namespace CatchPhrase
                 {
                     Value.Text = "";
                     authors.SelectedIndex = types.SelectedIndex = -1;
+                }
+            }
+        }
+
+        private void comboBox_selectId(ComboBox box, int id)
+        {
+            for (int i = 0; i < box.Items.Count; i++)
+            {
+                if ((int) ((DataRowView) box.Items[i]).Row[0] == id)
+                {
+                    box.SelectedIndex = i;
+                    return;
                 }
             }
         }
@@ -111,8 +123,10 @@ namespace CatchPhrase
                 if (Id < 1)
                 {
                     // Добавим пустую запись в таблицу Phrase
-                    new SqlCommand($"INSERT INTO Phrase({(id_author>0?"Author_Id,":"")}{(id_type>0?"TypePhrase_Id,":"")}Value) " +
-                                   $"VALUES({(id_author>0?$"{id_author},":null)}{(id_type>0?$"{id_type},":null)}N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
+                    new SqlCommand($"INSERT INTO Phrase({(id_author>0?"Author_Id,":"")}" +
+                                   $"{(id_type>0?"TypePhrase_Id,":"")}Value) " +
+                                   $"VALUES({(id_author>0?$"{id_author},":null)}{(id_type>0?$"{id_type},":null)}" +
+                                   $"N'{Value.Text.Trim()}')", con).ExecuteNonQuery();
                 }
                 else
                 {

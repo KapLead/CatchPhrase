@@ -41,16 +41,14 @@ namespace CatchPhrase
                 var dat = new DataTable();
                 // заполним таблицу данными
                 adapter.Fill(dat);
-                if (grid.DataSource == null)
-                {
+                if (grid.DataSource == null) {
                     grid.Rows.Clear();
                     grid.Columns.Clear();
                 }
                 // установим таблицу ресурсом данных для DataGridView
                 grid.DataSource = dat;
                 // если надо отобразим поле Id записи
-                if (Settings.Default.ShowIdTables)
-                {
+                if (Settings.Default.ShowIdTables) {
                     // Установим факсированную длину столбца
                     grid.Columns[0].Width = 25;
                     // Поле Id - только чтение
@@ -127,7 +125,15 @@ namespace CatchPhrase
             {
                 con.Open(); // Откроем соединение
                 // Удалить запись из таблицы Author
-                new SqlCommand($"DELETE FROM Author WHERE Id={id}", con).ExecuteNonQuery();
+                try
+                {
+                    new SqlCommand($"DELETE FROM Author WHERE Id={id}", con).ExecuteNonQuery();
+                }
+                catch
+                {
+                    MessageBox.Show(@"У данного автора имеются фразы. Предварительно удалите фразы данного автора",
+                        @"Удаление запрещено!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             UpdateTable(); // Обновим содержимое таблицы
         }

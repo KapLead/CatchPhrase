@@ -26,10 +26,10 @@ namespace CatchPhrase
                 ;
                 var dat = new DataTable();
                 // заполним таблицу данными
-                adapter.Fill(dat);       // var result = new SqlCommand($"SELECT * FROM Author WHERE Id={Id}", con).ExecuteReader();
+                adapter.Fill(dat);       
                 author.Text = dat.Rows[0][1].ToString();
                 country.Text = dat.Rows[0][2].ToString();
-                }
+            }
             else
             {
                 author.Text = "";
@@ -56,12 +56,14 @@ namespace CatchPhrase
                 // Добавим новую запись в таблицу Author
                 if (Id < 1)
                 {
-                    new SqlCommand($"INSERT INTO Author(Name,Country) VALUES(N'{author.Text}',N'{country.Text}')", con)
+                    new SqlCommand($"INSERT INTO Author(Name,Country) " +
+                                   $"VALUES(N'{author.Text}',N'{country.Text}')", con)
                         .ExecuteNonQuery();
                 }
                 else
                 // Обновим значение отредактированной ячейки
-                new SqlCommand($"UPDATE Author SET Name=N'{author.Text.Trim()}', Country=N'{country.Text.Trim()}' WHERE Id={Id}", con)
+                new SqlCommand($"UPDATE Author SET Name=N'{author.Text.Trim()}', " +
+                               $"Country=N'{country.Text.Trim()}' WHERE Id={Id}", con)
                     .ExecuteNonQuery();
             }
             Close();
